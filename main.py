@@ -38,7 +38,7 @@ class ViewPostHandler(webapp2.RequestHandler):
 
 class MainHandler(webapp2.RequestHandler):
     def get(self):
-        self.response.write('Working on build-a-blog: Hannah.')
+        self.response.write('Added jinja2 in app.yaml;imported jinja2 in main.py: Hannah.')
 
 app = webapp2.WSGIApplication([
     ('/', MainHandler)
