@@ -1,3 +1,4 @@
+#7:48 am Feb15,2017 Wed
 #!/usr/bin/env python
 #
 # Copyright 2007 Google Inc.
@@ -15,10 +16,29 @@
 # limitations under the License.
 #
 import webapp2
+import cgi
+import jinja2
+import os
+from google.appengine.ext import db
+# set up jinja
+template_dir = os.path.join(os.path.dirname(__file__), "templates")
+jinja_env = jinja2.Environment(loader = jinja2.FileSystemLoader(template_dir))
+
+# def render_str(self,template,**params):
+# 	t = jinja _env.get_template('mainblog.html')
+#  	return t.render(params)
+
+
+
+
+class ViewPostHandler(webapp2.RequestHandler):
+    def get(self,id):
+        self,response.write()
+
 
 class MainHandler(webapp2.RequestHandler):
     def get(self):
-        self.response.write('Hello world of code,Hi from Hannah!')
+        self.response.write('Working on build-a-blog: Hannah.')
 
 app = webapp2.WSGIApplication([
     ('/', MainHandler)
