@@ -24,9 +24,9 @@ from google.appengine.ext import db
 template_dir = os.path.join(os.path.dirname(__file__), "templates")
 jinja_env = jinja2.Environment(loader = jinja2.FileSystemLoader(template_dir))
 
-# def render_str(self,template,**params):
-# 	t = jinja _env.get_template('mainblog.html')
-#  	return t.render(params)
+def render_str(self,template,**params):
+	t = jinja _env.get_template(template)
+ 	return t.render(params)
 
 
 
@@ -38,7 +38,8 @@ class ViewPostHandler(webapp2.RequestHandler):
 
 class MainHandler(webapp2.RequestHandler):
     def get(self):
-        self.response.write('Added jinja2 in app.yaml;imported jinja2 in main.py: Hannah.')
+#        self.response.write('Added jinja2 in app.yaml;imported jinja2 in main.py: Hannah.')
+        self.response.write(self.render_str('template.html'))
 
 app = webapp2.WSGIApplication([
     ('/', MainHandler)
