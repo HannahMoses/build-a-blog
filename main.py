@@ -54,8 +54,14 @@ class MainPage(webapp2.RequestHandler):
             outmessage="That is not a valid birthday !"
             self.write_form(outmessage,user_month,user_day,user_year)
         else:
-            outhead =" <h2 style='background-color:rgb(200,134,125)'> Thanks for entering good data !</h2>"
-            self.response.write(outhead + outform)
+            self.redirect('/thanks')
+            # outhead =" <h2 style='background-color:rgb(200,134,125)'> Thanks for entering good data !</h2>"
+            # self.response.write(outhead + outform)
+class ThanksHandler(webapp2.RequestHandler):
+    def get(self):
+        outhead =" <h2 style='background-color:rgb(200,134,125)'> Thanks for entering valid data !</h2>"
+        self.response.out.write(outhead + outform)
 app = webapp2.WSGIApplication([
-	('/',MainPage)
+	('/',MainPage),
+    ('/thanks',ThanksHandler)
 	], debug=True)
