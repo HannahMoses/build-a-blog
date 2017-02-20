@@ -1,7 +1,7 @@
 
 #FEb20 ,2017 10:47 am
 import webapp2
-
+header="<h2 style='color:white;background-color:rgb(145,0,0);text-align:center'>WELCOME </h2><br>"
 form="""
 <form method="post">
 	What is your birthday?<br>
@@ -31,7 +31,7 @@ def valid_year(year):
             return year
 class MainPage(webapp2.RequestHandler):
     def get(self):
-        self.response.out.write(form)
+        self.response.out.write(header + form)
 
     def post(self):
         user_month=valid_month(self.request.get("month"))
