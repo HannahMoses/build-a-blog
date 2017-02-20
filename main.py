@@ -1,15 +1,16 @@
 
 #FEb20 ,2017 10:47 am
 import webapp2
-header="<h2 style='color:white;background-color:rgb(145,0,0);text-align:center'>WELCOME </h2><br>"
+header="<h2 style='color:white;background-color:rgb(145,0,0);text-align:center'>WELCOME </h2>"
 form="""
-<form method="post">
-	What is your birthday?<br>
-	<label>Month <input type="text" name="month" ></label> <br><br>
-	<label>Day <input type="text" name="day"></label><br><br>
-    <label>Year <input type="text" name="year"></label><br><br>
-  	<br><br>
-    <input type="submit">
+<form method="post"  style='color:rgb(145,0,0);background-color:pink'>
+    <body style='color:rgb(145,0,0);background-color:pink' ><p>Please enter your Bday</p>
+    	<label>Month <input type="text" name="month" ></label> <br><br>
+    	<label>Day <input type="text" name="day"></label><br><br>
+        <label>Year <input type="text" name="year"></label><br><br>
+      	<br><br>
+        <input type="submit">
+    </body>
 </form>
 """
 months = ['January','February','March','April','May','June','July',
