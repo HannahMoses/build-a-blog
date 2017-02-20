@@ -1,4 +1,4 @@
-#FIFTH VERSION BEFORE I STARTED UDACITY STYLE CODING
+#feb 20 2017,Mon 3:53 pm PRESIDENT'S DAY 4430GSWAY
 import webapp2
 import cgi
 import re
@@ -59,7 +59,7 @@ class MainHandler(webapp2.RequestHandler):
         vpwdwarn = ""
         emailwarn = ""
         if not valid_username(user):#If you supply "user" as this parameter, then it is not the same as user = self.request.get("username")
-            userwarn = "<label style='color:red'>   This is not valid username.</label>"
+            userwarn = "<label style='color:red'>   This is not a valid username.</label>"
             faulty_form = True
         if not valid_password(passw):
             pwdwarn = "<label style='color:red'>   This is not a valid password.</label>"
