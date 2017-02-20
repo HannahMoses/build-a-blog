@@ -41,8 +41,9 @@ class MainPage(webapp2.RequestHandler):
         if not(user_month and user_day and user_year):
             self.response.write("Error")
         else:
-
-            outhead = "<h2 style='background-color:rgb(200,134,125)'>Thanks for a valid day !</h2>"
+            gooddata = "Thanks for entering valid data !"
+            outmessage = gooddata
+            outhead = "<h2 style='background-color:rgb(200,134,125)'>"+outmessage+" </h2>"
             outbody ="<body style='color:white;background-color:rgb(200,134,125)' ><p> *************** </p></body>"
             self.response.out.write(outhead+outbody)
 
