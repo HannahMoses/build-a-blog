@@ -1,13 +1,14 @@
 
-#FEb20 ,2017 1:19 pm
+#FEb20 ,2017 2:42 pm
 import webapp2
+import cgi
 header="<h2 style='color:white;background-color:rgb(145,0,0);text-align:center'>WELCOME </h2>"
 form="""<form method="post"  style='color:rgb(145,0,0);background-color:pink'>
     <div style='color:green'><h2>%(error)s</h2></div>
-    <body style='color:rgb(145,0,0);background-color:pink' ><p>Please enter your birthday</p>
-        <label>Month <input type="text" name="month" value=%(month)s ></label> <br><br>
-    	<label>Day <input type="text" name="day" value=%(day)s></label><br><br>
-        <label>Year <input type="text" name="year" value=%(year)s></label><br><br>
+    <body style='color:rgb(145,0,0);background-color:pink' ><p>Please enter your birthday : </p>
+        <label type ="text" style='width:80px;display:inline-block'>Month </label><input type="text" name="month" value=%(month)s > <br><br>
+    	<label  type ="text"  style='width:80px;display:inline-block'>Day</label> <input type="text" name="day" value=%(day)s><br><br>
+        <label   type ="text" style='width:80px;display:inline-block'>Year </label><input type="text" name="year" value=%(year)s><br><br>
         <br><br>
         <input type="submit" value="Submit Bday"style='color:white;background-color:rgb(145,0,0)'>
     </body>
@@ -41,9 +42,9 @@ class MainPage(webapp2.RequestHandler):
         self.response.out.write(header)
         self.write_form()
     def post(self):
-        user_month=(self.request.get("month"))
-        user_day = (self.request.get("day"))
-        user_year =(self.request.get("year"))
+        user_month=cgi.escape(self.request.get("month"))
+        user_day = cgi.escape(self.request.get("day"))
+        user_year =cgi.escape(self.request.get("year"))
 
         month = valid_month(user_month)
         day = valid_day(user_day)
