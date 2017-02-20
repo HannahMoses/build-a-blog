@@ -1,9 +1,8 @@
 
-#FEb20 ,2017 10:47 am
+#FEb20 ,2017 12:09 pm
 import webapp2
 header="<h2 style='color:white;background-color:rgb(145,0,0);text-align:center'>WELCOME </h2>"
-form="""
-<form method="post"  style='color:rgb(145,0,0);background-color:pink'>
+form="""<form method="post"  style='color:rgb(145,0,0);background-color:pink'>
     <body style='color:rgb(145,0,0);background-color:pink' ><p>Please enter your Bday</p>
     	<label>Month <input type="text" name="month" ></label> <br><br>
     	<label>Day <input type="text" name="day"></label><br><br>
@@ -11,8 +10,13 @@ form="""
       	<br><br>
         <input type="submit" value="Submit Bday"style='color:white;background-color:rgb(145,0,0)'>
     </body>
-</form>
-"""
+</form>"""
+outform="""<form method='post'>"
+        " <body style='color:white;background-color:rgb(200,134,125)' >"
+        " <h2 style='background-color:rgb(200,134,125)'>" +message+"</h2>"
+        " <p> *************** </p>"
+        "</body>"
+         "</form">"""
 months = ['January','February','March','April','May','June','July',
         'August','September','October','November','December']
 month_abbvs=dict((m[:3].lower(),m)for m in months)
@@ -42,10 +46,11 @@ class MainPage(webapp2.RequestHandler):
             self.response.write("Error")
         else:
             gooddata = "Thanks for entering valid data !"
-            outmessage = gooddata
-            outhead = "<h2 style='background-color:rgb(200,134,125)'>"+outmessage+" </h2>"
-            outbody ="<body style='color:white;background-color:rgb(200,134,125)' ><p> *************** </p></body>"
-            self.response.out.write(outhead+outbody)
+            message = gooddata
+            self.response.write(outform % message)
+            # outhead = "<h2 style='background-color:rgb(200,134,125)'>"+message+" </h2>"
+            # outbody ="<body style='color:white;background-color:rgb(200,134,125)' ><p> *************** </p></body>"
+            # self.response.out.write(outhead+outbody)
 
 app = webapp2.WSGIApplication([
 	('/',MainPage)
