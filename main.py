@@ -1,67 +1,87 @@
-
-#FEb20 ,2017 2:42 pm
+#FIFTH VERSION BEFORE I STARTED UDACITY STYLE CODING
 import webapp2
 import cgi
-header="<h2 style='color:white;background-color:rgb(145,0,0);text-align:center'>WELCOME </h2>"
-form="""<form method="post"  style='color:rgb(145,0,0);background-color:pink'>
-    <div style='color:green'><h2>%(error)s</h2></div>
-    <body style='color:rgb(145,0,0);background-color:pink' ><p>Please enter your birthday : </p>
-        <label type ="text" style='width:80px;display:inline-block'>Month </label><input type="text" name="month" value=%(month)s > <br><br>
-    	<label  type ="text"  style='width:80px;display:inline-block'>Day</label> <input type="text" name="day" value=%(day)s><br><br>
-        <label   type ="text" style='width:80px;display:inline-block'>Year </label><input type="text" name="year" value=%(year)s><br><br>
-        <br><br>
-        <input type="submit" value="Submit Bday"style='color:white;background-color:rgb(145,0,0)'>
-    </body>
-</form>"""
-outform="""<form method='post'>
-                 <body style='color:white;background-color:rgb(200,134,125)' >
-                  <p> ****************************************** </p>
-                 </body>
-           </form>"""
-months = ['January','February','March','April','May','June','July',
-        'August','September','October','November','December']
-month_abbvs=dict((m[:3].lower(),m)for m in months)
-def valid_month(month):
-    if month :
-        short_month = month[:3].lower()
-        return month_abbvs.get(short_month)
-def valid_day(day):
-    if day and day.isdigit():
-        day = int(day)
-        if (0<day<=31):
-            return day
-def valid_year(year):
-    if year and year.isdigit():
-        year=int(year)
-        if (1900<year<2020):
-            return year
-class MainPage(webapp2.RequestHandler):
-    def write_form(self,error="",month="",day="",year=""):
-        self.response.out.write(form % {"error": error,"month":month,"day":day,"year":year})
+import re
+form="""
+<html>
+<head>
+</head>
+<body style="background-color:rgb(255,167,132);">
+<h1>Signup</h1>
+    <form method="post">
+        <label type="text" style="display:inline-block;width:150px;color:black">Username</label>
+        <input type="text" name="username" value="%(username)s">%(username_error)s<br><br>
+        <label type="text" style="display:inline-block;width:150px;color:black">Password</label>
+        <input type="password" name="password">%(password_error)s<br><br>
+        <label type="text" style="display:inline-block;width:150px;color:black">Verify Password</label>
+        <input type="password" name="Vpassword">%(Vpassword_error)s<br><br>
+        <label type="text" style="display:inline-block;width:150px;color:black">Email Optional</label>
+        <input type="text" name="email"value="%(email)s">%(email_error)s<br><br>
+    <input type="submit" value="Submit Query">
+    </form>
+</body>
+</html>
+"""
+
+
+USER_RE = re.compile(r"^[a-zA-Z0-9_-]{3,20}$")
+def valid_username(username):
+    return username and USER_RE.match(username)
+PASS_RE = re.compile(r"^.{3,20}$")
+def valid_password(password):
+    return password and PASS_RE.match(password)
+
+EMAIL_RE = re.compile(r"^[\S]+@[\S]+\.[\S]+$")
+def valid_email(email):
+    return not email or EMAIL_RE.match(email)
+
+class MainHandler(webapp2.RequestHandler):
     def get(self):
-        self.response.out.write(header)
-        self.write_form()
+        inputinfo = dict(username = "", username_error = "",
+                             password_error="",
+                             Vpassword_error="",
+                             email="",email_error="")# to preserve the data user typed in Username box
+
+        global form# to declare that form is the global variable declared in hTMl above and
+                    #it is being assigned to a local variable form which replaces username_error etc
+                    # with new values in the " "
+        # form= form % inputinfo#overwriting the original form, so I commented this line of code& inserted the line below
+        self.response.out.write(form % inputinfo)
     def post(self):
-        user_month=cgi.escape(self.request.get("month"))
-        user_day = cgi.escape(self.request.get("day"))
-        user_year =cgi.escape(self.request.get("year"))
-
-        month = valid_month(user_month)
-        day = valid_day(user_day)
-        year = valid_year(user_year)
-
-        if not(month and day and year):
-            outmessage="That is not a valid birthday !"
-            self.write_form(outmessage,user_month,user_day,user_year)
-        else:
-            self.redirect('/thanks')
-            # outhead =" <h2 style='background-color:rgb(200,134,125)'> Thanks for entering good data !</h2>"
-            # self.response.write(outhead + outform)
-class ThanksHandler(webapp2.RequestHandler):
+        user =self.request.get("username")
+        faulty_form=False
+#        validuser = cgi. escaped(user)
+        passw = self.request.get("password")
+        VerifiedPassword = self.request.get("Vpassword")
+        Email = self.request.get("email")
+        userwarn = ""
+        pwdwarn = ""
+        vpwdwarn = ""
+        emailwarn = ""
+        if not valid_username(user):#If you supply "user" as this parameter, then it is not the same as user = self.request.get("username")
+            userwarn = "<label style='color:red'>   This is not valid username.</label>"
+            faulty_form = True
+        if not valid_password(passw):
+            pwdwarn = "<label style='color:red'>   This is not a valid password.</label>"
+            faulty_form = True
+        elif VerifiedPassword !=passw:
+            vpwdwarn ="<label style='color:red'> Passwords do not match.</label>"
+            faulty_form = True
+        if not valid_email(Email):
+            emailwarn = "<label style='color:red'> This is not a valid email.</label>"
+            faulty_form = True
+        inputinfo = dict(username= user, username_error = userwarn,
+                         password_error=pwdwarn,
+                         Vpassword_error=vpwdwarn,
+                         email=Email,email_error=emailwarn)
+        self.response.write( form % inputinfo)
+        if faulty_form == False:
+            self.redirect('/welcome?username={0}'.format(user))
+class WelcomeHandler(webapp2.RequestHandler):
     def get(self):
-        outhead =" <h2 style='background-color:rgb(200,134,125)'> Thanks for entering valid data !</h2>"
-        self.response.out.write(outhead + outform)
-app = webapp2.WSGIApplication([
-	('/',MainPage),
-    ('/thanks',ThanksHandler)
-	], debug=True)
+        user = self.request.get("username")
+        content = "Welcome," +user +"!"
+        self.response.write(content)
+app = webapp2.WSGIApplication([ ('/',MainHandler),
+    ('/welcome',WelcomeHandler)
+    ],debug=True)
