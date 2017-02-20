@@ -1,6 +1,7 @@
 
 #FEb20 ,2017 10:47 am
 import webapp2
+
 form="""
 <form method="post">
 	What is your birthday?<br>
@@ -31,9 +32,6 @@ def valid_year(year):
 class MainPage(webapp2.RequestHandler):
     def get(self):
         self.response.out.write(form)
-        self.response.write(str(months)+"<br><br>")
-        self.response.write("Dictionary named month_abbvs :"+"<br><br>")
-        self.response.write(month_abbvs)
 
     def post(self):
         user_month=valid_month(self.request.get("month"))
