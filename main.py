@@ -1,6 +1,16 @@
 #TEMPLATES  feb 20 2017,Mon 6:56pm PRESIDENT'S DAY 4430GSWAY
 import os
 import webapp2
+form_html = """
+<form >
+   <body style='background-color:rgb(0,234,222)' >
+   <h2> Add a food </h2>
+   <input type = "text"  name="food"
+   <button> Add food </button>
+   </body>
+</form>
+"""
+
 
 class Handler (webapp2.RequestHandler):
     def write(self,*a,**kw):
@@ -8,7 +18,9 @@ class Handler (webapp2.RequestHandler):
 
 class MainPage(Handler):
     def get(self):
-        self.write("Hello, Udacity !")
+        a="<h4 style='color:white;background-color:rgb(234,13,156);text-align:center''>Hello, Udacity !!!!<h4>"
+        self.write(a)
+        self.write(form_html)
 
 app = webapp2.WSGIApplication([('/',MainPage),
                                 ],
