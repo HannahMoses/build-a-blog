@@ -6,6 +6,7 @@ form_html = """
    <body style='background-color:rgb(0,234,200)' >
    <h2 style='color:rgb(234,13,156)'> Add a food </h2>
    <input type = "text"  name="food" ><br><br>
+   <input type="hidden" name="food" value="eggs">
    <button> Add food </button>
    </body>
 </form>
