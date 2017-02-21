@@ -1,11 +1,11 @@
 #TEMPLATES  feb 20 2017,Mon 6:56pm PRESIDENT'S DAY 4430GSWAY
 import os
-import webapp2
+import webapp2#rgb(0,234,200) also use rgb(0,234,222
 form_html = """
 <form >
-   <body style='background-color:rgb(0,234,222)' >
-   <h2> Add a food </h2>
-   <input type = "text"  name="food"
+   <body style='background-color:rgb(0,234,200)' >
+   <h2 style='color:rgb(234,13,156)'> Add a food </h2>
+   <input type = "text"  name="food" ><br><br>
    <button> Add food </button>
    </body>
 </form>
